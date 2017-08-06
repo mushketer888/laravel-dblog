@@ -4,7 +4,9 @@
     "keywords": [
         "laravel",
         "laravel-dblog",
-        "dblog"
+        "dblog",
+        "database",
+        "log"
     ],
     "homepage": "https://github.com/mushketer888/laravel-dblog",
     "license": "MIT",
