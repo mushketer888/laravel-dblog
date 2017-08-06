@@ -27,7 +27,8 @@ class Writer extends \Illuminate\Log\Writer
                 [
                     'level' => $level,
                     'message' => $message,
-                    'context' => $context
+                    'context' => $context,
+                    'env'=>''
                 ]
             );
         } catch (\Exception $e) {
