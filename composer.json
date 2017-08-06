@@ -1,0 +1,45 @@
+{
+    "name": "mushketer888/laravel-dblog",
+    "description": "Extending Laravel Logger with Eqloquent Logging in DB",
+    "keywords": [
+        "laravel",
+        "laravel-dblog",
+        "dblog"
+    ],
+    "homepage": "https://github.com/mushketer888/laravel-dblog",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilya L.",
+            "email": "mushketer888@gmail.com",
+            "homepage": "https://github.com/mushketer888/laravel-dblog",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.5.0",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mushketer888\\LaravelDblog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mushketer888\\LaravelDblog\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.5-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
