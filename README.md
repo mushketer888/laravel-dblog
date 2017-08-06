@@ -1,6 +1,7 @@
 # laravel-dblog 
 [![Latest Stable Version](https://poser.pugx.org/mushketer888/laravel-dblog/version)](https://packagist.org/packages/mushketer888/laravel-dblog)
 [![Total Downloads](https://poser.pugx.org/mushketer888/laravel-dblog/downloads)](https://packagist.org/packages/mushketer888/laravel-dblog)
+[![License](https://poser.pugx.org/mushketer888/laravel-dblog/license)](https://packagist.org/packages/mushketer888/laravel-dblog)
 
 This package duplicates Log information to database table.
 
