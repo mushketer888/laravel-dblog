@@ -27,6 +27,7 @@ class CreateDblogTable extends Migration
                 'ALERT',
                 'EMERGENCY'
             ])->default('INFO');
+            $table->text('context');
             $table->timestamps();
         });
     }
