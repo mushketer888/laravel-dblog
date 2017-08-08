@@ -46,10 +46,22 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
-        Event::listen(MessageLogged::class, function (MessageLogged $e) {
-
-        });
         $this->registerMigrations();
+        Event::listen(MessageLogged::class, function (MessageLogged $e) {
+            try {
+                \Mushketer888\LaravelDblog\DBLog::create(
+                    [
+                        'level' => $e->level,
+                        'message' => $e->message,
+                        'context' => $e->context,
+                        'env' => ''
+                    ]
+                );
+            } catch (\Exception $ex) {
+
+            }
+        });
+
     }
 
     protected function packagePath($path = '')
