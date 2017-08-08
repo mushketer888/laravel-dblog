@@ -5,6 +5,7 @@ namespace Mushketer888\LaravelDblog;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Monolog\Logger as Monolog;
 use Illuminate\Log\LogServiceProvider as LaravelServiceProvider;
 
@@ -47,20 +48,22 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         $this->registerMigrations();
-        Event::listen(MessageLogged::class, function (MessageLogged $e) {
-            try {
-                \Mushketer888\LaravelDblog\DBLog::create(
-                    [
-                        'level' => $e->level,
-                        'message' => $e->message,
-                        'context' => $e->context,
-                        'env' => ''
-                    ]
-                );
-            } catch (\Exception $ex) {
+        if (Schema::hasTable('logs')) {
+            Event::listen(MessageLogged::class, function (MessageLogged $e) {
+                try {
+                    \Mushketer888\LaravelDblog\DBLog::create(
+                        [
+                            'level' => $e->level,
+                            'message' => $e->message,
+                            'context' => $e->context,
+                            'env' => ''
+                        ]
+                    );
+                } catch (\Exception $ex) {
 
-            }
-        });
+                }
+            });
+        }
 
     }
 
