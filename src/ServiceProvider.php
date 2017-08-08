@@ -2,6 +2,7 @@
 
 namespace Mushketer888\LaravelDblog;
 
+use Illuminate\Support\Facades\Log;
 use Monolog\Logger as Monolog;
 use Illuminate\Log\LogServiceProvider as LaravelServiceProvider;
 
@@ -14,6 +15,7 @@ use Illuminate\Log\LogServiceProvider as LaravelServiceProvider;
  */
 class ServiceProvider extends LaravelServiceProvider
 {
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -31,22 +33,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
 
-        $this->app->singleton('log', function () {
-
-
-            //var_dump($this->app['events']);
-            $log = new \Mushketer888\LaravelDblog\Writer(
-                new Monolog($this->channel()), $this->app['events']
-            );
-
-            if ($this->app->hasMonologConfigurator()) {
-                call_user_func($this->app->getMonologConfigurator(), $log->getMonolog());
-            } else {
-                $this->configureHandler($log);
-            }
-
-            return $log;
-        });
+        Log::listen();
     }
 
     /**
