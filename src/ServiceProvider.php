@@ -2,6 +2,10 @@
 
 namespace Mushketer888\LaravelDblog;
 
+use Illuminate\Log\Events\MessageLogged;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Monolog\Logger as Monolog;
 use Illuminate\Log\LogServiceProvider as LaravelServiceProvider;
 
@@ -14,6 +18,7 @@ use Illuminate\Log\LogServiceProvider as LaravelServiceProvider;
  */
 class ServiceProvider extends LaravelServiceProvider
 {
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -31,22 +36,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
 
-        $this->app->singleton('log', function () {
 
-
-            //var_dump($this->app['events']);
-            $log = new \Mushketer888\LaravelDblog\Writer(
-                new Monolog($this->channel()), $this->app['events']
-            );
-
-            if ($this->app->hasMonologConfigurator()) {
-                call_user_func($this->app->getMonologConfigurator(), $log->getMonolog());
-            } else {
-                $this->configureHandler($log);
-            }
-
-            return $log;
-        });
     }
 
     /**
@@ -58,6 +48,23 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         $this->registerMigrations();
+        if (Schema::hasTable('logs')) {
+            Event::listen(MessageLogged::class, function (MessageLogged $e) {
+                try {
+                    \Mushketer888\LaravelDblog\DBLog::create(
+                        [
+                            'level' => $e->level,
+                            'message' => $e->message,
+                            'context' => $e->context,
+                            'env' => ''
+                        ]
+                    );
+                } catch (\Exception $ex) {
+
+                }
+            });
+        }
+
     }
 
     protected function packagePath($path = '')
