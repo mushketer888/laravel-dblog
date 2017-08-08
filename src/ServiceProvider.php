@@ -2,6 +2,8 @@
 
 namespace Mushketer888\LaravelDblog;
 
+use Illuminate\Log\Events\MessageLogged;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Monolog\Logger as Monolog;
 use Illuminate\Log\LogServiceProvider as LaravelServiceProvider;
@@ -33,7 +35,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
 
-        Log::listen();
+
     }
 
     /**
@@ -44,6 +46,9 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
+        Event::listen(MessageLogged::class, function (MessageLogged $e) {
+
+        });
         $this->registerMigrations();
     }
 
