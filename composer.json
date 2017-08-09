@@ -24,8 +24,8 @@
     },
     "require-dev": {
         "mockery/mockery": "dev-master",
-        "phpunit/phpunit": "~5.7",
-        "graham-campbell/testbench": "^4.0"
+        "phpunit/phpunit": "dev",
+        "graham-campbell/testbench": "dev"
     },
     "autoload": {
         "psr-4": {
