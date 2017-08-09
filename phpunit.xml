@@ -8,6 +8,8 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
+         failOnRisky="true"
+         failOnWarning="true"
          processIsolation="false"
          stopOnError="false"
          stopOnFailure="false"
@@ -18,4 +20,10 @@
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
+    <env name="APP_ENV" value="testing"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value="db.sqlite"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="QUEUE_DRIVER" value="sync"/>
 </phpunit>

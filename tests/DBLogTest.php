@@ -1,25 +1,34 @@
 <?php
+namespace Mushketer888\LaravelDblog\Tests;
 
+use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
+use Mushketer888\LaravelDblog\ServiceProvider;
 use PHPUnit\Framework\TestCase;
 
-class DBLogTest extends TestCase
+class DBLogTest extends AbstractPackageTestCase
 {
-    protected $log;
+    use ServiceProviderTrait;
+    use DatabaseMigrations;
 
-    protected $flash;
 
-    public function setUp()
+    protected function getServiceProviderClass($app)
     {
-       // $this->session = Mockery::spy('Laracasts\Flash\SessionStore');
-
-        //$this->flash = new FlashNotifier($this->session);
-    }
-
-    /** @test */
-    function it_unit_test()
-    {
-        $this->assertEmpty('');
+        return ServiceProvider::class;
     }
 
 
+    public function test_table(){
+       // dump(DB::table('logs')->get());
+    }
+
+    protected function setUp()
+    {
+       //$this->runDatabaseMigrations();
+    }
 }
